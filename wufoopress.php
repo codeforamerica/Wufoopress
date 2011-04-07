@@ -1,4 +1,14 @@
 <?php
+/*
+Plugin Name: WufooPress
+Plugin URI: https://github.com/codeforamerica/Wufoopress
+Description: Uses Wufoo API to create posts when a Wufoo form is submitted
+Version: 0.1
+Author: Code for America
+Author URI: http://codeforamerica.org
+License: be_nice
+*/
+
 
     require_once('lib/wufoo/WufooApiWrapper.php');
     $wrapper = new WufooApiWrapper('Z5TN-C4X6-B2XV-8YHB', 'codeforamerica'); //create the class
