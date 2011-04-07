@@ -15,16 +15,31 @@
     $client = new IXR_Client('http://localhost/cfa_wordpress/xmlrpc.php');  
 
 
-    foreach ($entries as $app)
+
+
+    $client->query('metaWeblog.getRecentPosts', '', 'abhi', 'password', 1);
+
+$posts = $client->getResponse();
+$latestpost = $posts[0];
+foreach ( ($latestpost["custom_fields"]) as $meta ) {
+    $custom_fields[$meta["key"]] = $meta['value'];
+}
+
+print_r($custom_fields["WufooID"]);
+
+
+/* foreach ($entries as $app)
 
     {
         
         
-        /* set up the post - there are many more keys you can include */
 
    $content['title'] = "$app->Field1";
 
          $content['description'] = "<p>".$app->Field3."</p>";
+         
+         
+         $content['mt_excerpt'] = "<p>".$app->Field366."</p>";
 
 
         $client->query('metaWeblog.newPost', '', 'abhi', 'password', $content, true);
@@ -41,7 +56,7 @@
 
         }
 
-    }
+    } */
 
 
 
