@@ -10,11 +10,11 @@ License: be_nice
 */
 
 
-    include('/Applications/MAMP/htdocs/cfa_wordpress/wp-includes/class-IXR.php');
-    $client = new IXR_Client('http://localhost/cfa_wordpress/xmlrpc.php');  
+    include('**WORDPRESS BASE URL**/wp-includes/class-IXR.php');
+    $client = new IXR_Client('**WORDPRESS BASE URL**/xmlrpc.php');  
     
     // get Recent Posts & WufooID Custom field number
-    $client->query('metaWeblog.getRecentPosts', '', 'abhi', 'password', 1);
+    $client->query('metaWeblog.getRecentPosts', '', ' **WORDPRESS USERNAME** ', ' **WORDPRESS PASSWORD** ', 1);
     $posts = $client->getResponse();
     $latestpost = $posts[0];
     
@@ -28,9 +28,9 @@ License: be_nice
     // got wufoo form entries
     
     require_once('lib/wufoo/WufooApiWrapper.php');
-    $wrapper = new WufooApiWrapper('Z5TN-C4X6-B2XV-8YHB', 'codeforamerica'); //create the class
-    $entries = $wrapper->getEntries('x7x3q1', 'forms', $WufooIDFilter );
-    $fields = $wrapper->getFields('x7x3q1', 'forms');
+    $wrapper = new WufooApiWrapper(' **API KEY** ', ' **WUFOO SUBDOMAIN** '); //create the class
+    $entries = $wrapper->getEntries(' ** WUFOO ENTRY ID** ', 'forms', $WufooIDFilter );
+    $fields = $wrapper->getFields(' ** WUFOO FIELD ID**', 'forms');
 
     //array remove helps work with the categories
 
