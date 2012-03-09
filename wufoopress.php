@@ -10,11 +10,11 @@ License: be_nice
 */
 
 
-    include('**WORDPRESS BASE URL**/wp-includes/class-IXR.php');
-    $client = new IXR_Client('**WORDPRESS BASE URL**/xmlrpc.php');  
+    include('lib/class-IXR.php');
+    $client = new IXR_Client('**wordpress domain***/xmlrpc.php');  
     
     // get Recent Posts & WufooID Custom field number
-    $client->query('metaWeblog.getRecentPosts', '', ' **WORDPRESS USERNAME** ', ' **WORDPRESS PASSWORD** ', 1);
+    $client->query('metaWeblog.getRecentPosts', '', '**username**', '**pass**', 1);
     $posts = $client->getResponse();
     $latestpost = $posts[0];
     
@@ -22,15 +22,15 @@ License: be_nice
         $custom_fields[$meta["key"]] = $meta['value'];
         }
     
-   $WufooIDFilter = 'Filter1=EntryId+Is_greater_than+1'.$custom_fields["WufooID"];    
+   $WufooIDFilter = 'Filter1=EntryId+Is_greater_than+'.$custom_fields["WufooID"];    
     
           
     // got wufoo form entries
     
     require_once('lib/wufoo/WufooApiWrapper.php');
-    $wrapper = new WufooApiWrapper(' **API KEY** ', ' **WUFOO SUBDOMAIN** '); //create the class
-    $entries = $wrapper->getEntries(' ** WUFOO ENTRY ID** ', 'forms', $WufooIDFilter );
-    $fields = $wrapper->getFields(' ** WUFOO FIELD ID**', 'forms');
+    $wrapper = new WufooApiWrapper('**API KEY**', '**Subdomain**'); //create the class
+    $entries = $wrapper->getEntries('**form hash**', 'forms', $WufooIDFilter );
+    $fields = $wrapper->getFields('**form hash**', 'forms');
 
     //array remove helps work with the categories
 
@@ -94,7 +94,7 @@ License: be_nice
         $content['categories'] = $cats;
  
         //POST THEM!
-        $client->query('metaWeblog.newPost', '', 'abhi', 'password', $content, true);
+        $client->query('metaWeblog.newPost', '', '**WP username**', '**pass**', $content, true);
 
         if ($client->message->faultString)
 
